@@ -1,0 +1,4 @@
+(executable
+ (public_name recipe_backend)
+ (name main)
+ (libraries recipe_backend))
