@@ -28,20 +28,27 @@ let to_string = function
   | Metric m -> to_string_metric m
   | Imperial i -> to_string_imperial i
 
-(* Define the regex pattern *)
-let pattern =
-  Re.Pcre.regexp
-    "\\(\\d+\\)\\s*\\(gr\\|gram\\|fl\\.\\s*oz\\|\\w*\\)\\s*\\(.*\\)"
+let re =
+  Re.compile
+    (Re.Posix.re "(?P<measure>\\d+(?:\\.\\d+)?(?: [^ ]+)?)?(?P<name>.+)")
 
-(* Function to extract values *)
-let extract_values str =
-  match Re.Pcre.exec ~rex:pattern str with
-  | exception Not_found -> ("", "", "")
-  | result ->
-      let value = Re.Pcre.get_substring result 1 in
-      let unit = Re.Pcre.get_substring result 2 in
-      let text = Re.Pcre.get_substring result 3 in
-      (value, unit, text)
+let parse_ingredients text =
+  (* let substrings = Re.exec re text in *)
+  let ingredients =
+    Re.all re text
+    |> List.filter_map (fun line ->
+           match line.(1) with
+           | Some (_, _, measure, name) ->
+               Some
+                 {
+                   measurement =
+                     (if String.is_empty measure then None else Some measure);
+                   name =
+                     String.trim (Str.cuts (Str.regexp_delim "▢" "") name).hd;
+                 }
+           | None -> None)
+  in
+  ingredients
 
 let process_ingredient x = extract_values x
 
