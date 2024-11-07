@@ -28,6 +28,4 @@ let to_string = function
   | Metric m -> to_string_metric m
   | Imperial i -> to_string_imperial i
 
-let make ingredient =
-  let value = ingredient |> List.map (fun t -> process_ingredient t) in
-  Some { name = text; amount = value }
+let make name ingredient = Some { name; amount = ingredient }
