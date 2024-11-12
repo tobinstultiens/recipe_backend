@@ -1,5 +1,3 @@
-open Re
-
 type metric = Gram of int | Mililiter of int | KiloGram of int
 
 type imperial =

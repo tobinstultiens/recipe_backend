@@ -1,4 +1,4 @@
 (executable
  (public_name recipe_backend)
  (name main)
- (libraries recipe_backend_lib))
+ (libraries dream recipe_backend))
