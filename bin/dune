@@ -3,7 +3,7 @@
   (deps 
         (:src ./stylesheets/main.scss)
         (glob_files ./stylesheets/*))
-  (action (run %{bin:scss} --load-path ./stylesheets %{src} %{targets})))
+  (action (run %{bin:sass} --load-path stylesheets %{src} %{targets})))
 
 (executable
  (public_name recipe_backend)

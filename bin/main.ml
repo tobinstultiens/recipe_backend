@@ -1,16 +1,8 @@
 open Dream_html
 open HTML
 
-let headTailwind =
-  head []
-    [
-      title [] "Recipe Manager";
-      script [ src "https://cdn.tailwindcss.com" ] "";
-      script [ src "https://unpkg.com/htmx.org@2.0.3" ] "";
-      script [] "tailwind config = { config: './css/tailwindcss-config.js' }";
-    ]
-
-let view = html [] [ headTailwind; null [ p [ class_ "" ] [ txt "Hello" ]; p [] [ txt "World" ] ] ]
+let headElements = head [] [ title [] "Recipe Manager"; script [ src "https://unpkg.com/htmx.org@2.0.3" ] "" ]
+let view = html [] [ headElements; null [ p [ class_ "" ] [ txt "Hello" ]; p [] [ txt "World" ] ] ]
 let greet name = p [ id "greet-%s" name ] [ txt "Hello, %s!" name ]
 
 let () =
