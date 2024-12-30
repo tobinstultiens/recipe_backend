@@ -1,11 +1,12 @@
-(rule
-  (targets main.min.css)
-  (deps 
-        (:src ./stylesheets/main.scss)
-        (glob_files ./stylesheets/*))
-  (action (run %{bin:sass} --load-path stylesheets %{src} %{targets})))
-
 (executable
  (public_name recipe_backend)
  (name main)
  (libraries dream dream-html recipe_backend))
+
+(rule
+  (targets main.min.css)
+  (deps 
+        (:src ./stylesheets/main.scss)
+        (glob_files stylesheets/*))
+  (action (run %{bin:sass} %{src} %{targets})))
+
