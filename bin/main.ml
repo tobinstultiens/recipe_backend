@@ -1,7 +1,14 @@
 open Dream_html
 open HTML
 
-let headElements = head [] [ title [] "Recipe Manager"; script [ src "https://unpkg.com/htmx.org@2.0.3" ] "" ]
+let headElements =
+  head []
+    [
+      title [] "Recipe Manager";
+      script [ src "https://unpkg.com/htmx.org@2.0.3" ] "";
+      link [ rel "stylesheet"; href "https://unpkg.com/mvp.css" ];
+    ]
+
 let view = html [] [ headElements; null [ p [ class_ "" ] [ txt "Hello" ]; p [] [ txt "World" ] ] ]
 let greet name = p [ id "greet-%s" name ] [ txt "Hello, %s!" name ]
 

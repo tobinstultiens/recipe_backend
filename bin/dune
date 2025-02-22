@@ -3,10 +3,15 @@
  (name main)
  (libraries dream dream-html recipe_backend))
 
-(rule
-  (targets main.min.css)
-  (deps 
-        (:src ./stylesheets/main.scss)
-        (glob_files stylesheets/*))
-  (action (run %{bin:sass} %{src} %{targets})))
-
+; (rule
+;   (alias scass)
+;   (deps (universe))
+;   (action (run sass bin/stylesheets/main.scss main.css)))
+;
+; (rule
+;   (targets main.css)
+;   (deps 
+;         (:src ./stylesheets/main.scss)
+;         (glob_files stylesheets/*))
+;   (action (run sass %{src} %{targets})))
+;
