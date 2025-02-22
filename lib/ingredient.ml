@@ -17,10 +17,7 @@ let to_string_metric = function
   | Mililiter v -> Printf.sprintf "%d" v ^ " ml"
   | KiloGram v -> Printf.sprintf "%d" v ^ " kg"
 
-let to_string = function Metric m -> to_string_metric m | Imperial i -> to_string_imperial i
-let name_validation s = String.length s <= 4
 let pattern = Re.Perl.compile_pat "^([0-9¼½¾]*)\\s+(tsp|cups|cup|etc)?\\s?(.*)$"
-let construct_imperial name quantity calories = { name; amount = Imperial quantity; calories }
 
 let parse_imperial quantity unit ing =
   match unit with
@@ -51,3 +48,6 @@ let parse_ingredient line =
 
 (** Parse an ingredient text into the ingredient type *)
 let make ingredient = parse_ingredient ingredient
+
+(** Converts recipe values to string format *)
+let to_string = function Metric m -> to_string_metric m | Imperial i -> to_string_imperial i
